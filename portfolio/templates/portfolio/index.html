@@ -1,0 +1,353 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaurya Srivastava - Portfolio</title>
+    <link rel="stylesheet" href="{% static 'portfolio/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>Shaurya Srivastava</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#certificates" class="nav-link">Certificates</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="glitch" data-text="Hi, I'm Shaurya Srivastava">Hi, I'm Shaurya Srivastava</h1>
+                <h2 class="typing-text">Computer Science Student | AI/ML Developer</h2>
+                <p class="hero-description">
+                    Passionate about building intelligent solutions and real-world applications.
+                    Experienced in Python, Django, Machine Learning, and Data Analytics.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Projects</a>
+                    <a href="{% static 'portfolio/resume.pdf' %}" class="btn btn-secondary" download>Download Resume</a>
+                </div>
+                <div class="social-links">
+                    {% for link in social_links %}
+                        <a href="{{ link.url }}" target="_blank" title="{{ link.platform }}">
+                            <i class="{{ link.icon_class }}"></i>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-photo-container">
+                    <div class="profile-photo-wrapper">
+                        <img src="{% static 'portfolio/images/Shaurya.jpg' %}" alt="Shaurya Srivastava" class="profile-photo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <!-- Ambient Background Glows -->
+        <div class="about-glow-orb about-glow-1"></div>
+        <div class="about-glow-orb about-glow-2"></div>
+
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-wrapper">
+                <!-- Bio Card -->
+                <div class="about-bio-card">
+                    <div class="about-card-top-bar">
+                        <div class="about-header-pill">
+                            <span class="status-pulse-dot"></span>
+                            <i class="fas fa-terminal"></i>
+                            <span>Background & Overview</span>
+                        </div>
+                        <div class="about-terminal-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    {% if about %}
+                        {% for paragraph in about.bio_paragraphs %}
+                            <p class="about-bio-text">{{ paragraph }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Feature / Highlight Cards Grid -->
+                <div class="about-features-grid">
+                    <div class="about-feature-card feature-card-education">
+                        <div class="feature-card-glow"></div>
+                        <div class="feature-icon-box education-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Education & Academics</h3>
+                            <p class="feature-subtitle">B.Tech in Computer Science</p>
+                            <p class="feature-detail">Babu Banarasi Das Institute of Technology and Management (BBDITM), focusing on CS fundamentals & systems design.</p>
+                            <span class="feature-tag"><i class="fas fa-calendar-check"></i> Graduating {{ about.graduation_date|default:"June 2027" }}</span>
+                        </div>
+                    </div>
+
+                    <div class="about-feature-card feature-card-aiml">
+                        <div class="feature-card-glow"></div>
+                        <div class="feature-icon-box aiml-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>AI/ML & Data Science</h3>
+                            <p class="feature-subtitle">Intelligent Solutions & NLP</p>
+                            <p class="feature-detail">Hands-on experience in Machine Learning, NLP pipelines (TF-IDF), text classification & real-time predictive APIs.</p>
+                            <span class="feature-tag"><i class="fas fa-check-circle"></i> 96% Model Accuracy</span>
+                        </div>
+                    </div>
+
+                    <div class="about-feature-card feature-card-dev">
+                        <div class="feature-card-glow"></div>
+                        <div class="feature-icon-box dev-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Full-Stack & Web Systems</h3>
+                            <p class="feature-subtitle">Scalable Architectures</p>
+                            <p class="feature-detail">Building RESTful APIs, Django MVT architectures, MySQL database systems, and secure deployment pipelines.</p>
+                            <span class="feature-tag"><i class="fas fa-code"></i> Django & Python</span>
+                        </div>
+                    </div>
+
+                    <div class="about-feature-card feature-card-strength">
+                        <div class="feature-card-glow"></div>
+                        <div class="feature-icon-box strength-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Core Strengths</h3>
+                            <p class="feature-subtitle">Problem Solving & Agility</p>
+                            <p class="feature-detail">Proficient in Data Structures & Algorithms, Object-Oriented Programming, clean code, and rapid technology adoption.</p>
+                            <span class="feature-tag"><i class="fas fa-rocket"></i> Continuous Learner</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Metric Bar -->
+                {% if about %}
+                <div class="about-stats-grid">
+                    <div class="stat-card stat-card-1">
+                        <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                        <div class="stat-info">
+                            <h3 class="stat-gradient-text">{{ about.graduation_date }}</h3>
+                            <p>Expected Graduation</p>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-2">
+                        <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="stat-info">
+                            <h3 class="stat-gradient-text">{{ about.internship_duration }}</h3>
+                            <p>IBM PBEL Internship</p>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-3">
+                        <div class="stat-icon"><i class="fas fa-award"></i></div>
+                        <div class="stat-info">
+                            <h3 class="stat-gradient-text">{{ about.certifications_count }}+</h3>
+                            <p>Professional Certifications</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            {% for exp in experiences %}
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="company-info">
+                            <h3>{{ exp.title }}</h3>
+                            <p class="company-name">{{ exp.company_name }}</p>
+                        </div>
+                        <span class="duration">{{ exp.duration }}</span>
+                    </div>
+                    <ul class="experience-points">
+                        {% for point in exp.points_list %}
+                            <li>{{ point }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="experience-skills">
+                        {% for skill in exp.skills_list %}
+                            <span>{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                {% for project in projects %}
+                    <div class="project-card">
+                        <div class="project-image">
+                            {% if project.image %}
+                                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                            {% else %}
+                                <div class="no-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white;">{{ project.title }}</div>
+                            {% endif %}
+                            <div class="project-overlay">
+                                {% if project.github_url %}
+                                    <a href="{{ project.github_url }}" target="_blank" class="project-link" title="View Code">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                {% endif %}
+                                {% if project.live_url %}
+                                    <a href="{{ project.live_url }}" target="_blank" class="project-link" title="Live Demo">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.description }}</p>
+                            <div class="project-meta">
+                                <span class="project-type">{{ project.project_type }}</span>
+                                {% if project.live_url %}
+                                    <span class="live-badge">🔴 Live Demo</span>
+                                {% endif %}
+                            </div>
+                            <div class="project-tags">
+                                {% for tag in project.tags_list %}
+                                    <span>{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                {% regroup skills by get_category_display as skills_by_category %}
+                {% for category in skills_by_category %}
+                    <div class="skill-category">
+                        <h4>{{ category.grouper }}</h4>
+                        <div class="skill-items">
+                            {% for skill in category.list %}
+                                <div class="skill-item">
+                                    <div class="skill-header">
+                                        <span class="skill-name">{{ skill.name }}</span>
+                                        <span class="skill-level">{{ skill.get_proficiency_display }}</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-level="{{ skill.proficiency }}"></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates">
+        <div class="container">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <div class="certificates-grid">
+                {% for cert in certificates %}
+                    <div class="cert-card">
+                        <div class="cert-icon">
+                            <i class="{{ cert.icon_class }}"></i>
+                        </div>
+                        <h3>{{ cert.title }}</h3>
+                        <p class="cert-issuer">{{ cert.issuer }}</p>
+                        {% if cert.date %}
+                            <p class="cert-date">{{ cert.date }}</p>
+                        {% endif %}
+                        <div class="cert-buttons">
+                            {% if cert.certificate_file %}
+                                <a href="{{ cert.certificate_file.url }}" target="_blank" class="cert-link">
+                                    <i class="fas fa-eye"></i> View Certificate
+                                </a>
+                            {% endif %}
+                            {% if cert.credential_url %}
+                                <a href="{{ cert.credential_url }}" target="_blank" class="cert-link">
+                                    View Credential <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                        {% if cert.certificate_file and cert.title != 'Core Java Certificate' and cert.title != 'Reimagine Certificate' %}
+                            <a href="{{ cert.certificate_file.url }}" class="cert-download" download>
+                                <i class="fas fa-file-pdf"></i> Download
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info">
+                {% for link in social_links %}
+                    <div class="contact-item">
+                        <i class="{{ link.icon_class }}"></i>
+                        <div>
+                            <h4>{{ link.platform }}</h4>
+                            <a href="{{ link.url }}" target="_blank">Connect on {{ link.platform }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Shaurya Srivastava. Built with passion and code.</p>
+            <div class="footer-links">
+                <a href="https://github.com/Shaurya170319" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shaurya-srivastava-8a493b241" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Shaurya22256@gmail.com" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'portfolio/js/script.js' %}"></script>
+</body>
+</html>
