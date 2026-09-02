@@ -26,20 +26,56 @@ window.addEventListener('scroll', () => {
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+// Toggle mobile menu
+function toggleMobileMenu() {
     hamburger.classList.toggle('active');
-});
+    navMenu.classList.toggle('active');
 
-// Close menu when link clicked (only on mobile)
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+}
+
+// Close mobile menu
+function closeMobileMenu() {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Hamburger click event
+hamburger.addEventListener('click', toggleMobileMenu);
+
+// Close menu when link clicked
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        // Only hide menu on mobile devices
         if (window.innerWidth < 768) {
-            navMenu.style.display = 'none';
-            hamburger.classList.remove('active');
+            closeMobileMenu();
         }
     });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (window.innerWidth < 768 &&
+        navMenu.classList.contains('active') &&
+        !navMenu.contains(e.target) &&
+        !hamburger.contains(e.target)) {
+        closeMobileMenu();
+    }
+});
+
+// Close menu on window resize (if switching to desktop)
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+        closeMobileMenu();
+    }
+});
+
+// Close menu on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMobileMenu();
+    }
 });
 
 // Typing animation
@@ -114,15 +150,8 @@ document.querySelectorAll('.project-card, .cert-card, .skill-category').forEach(
     observer.observe(element);
 });
 
-// Form submission
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        showNotification('Message received! Thanks for reaching out.', 'success');
-        contactForm.reset();
-    });
-}
+// Form submission - removed as contact form doesn't exist in current template
+// The contact section uses social links instead of a form
 
 // Notification system
 function showNotification(message, type = 'info') {
